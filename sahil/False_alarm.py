@@ -2,7 +2,7 @@ from flask import Flask,jsonify,request
 import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
-from sklearn.externals import joblib
+import joblib
 import numpy as np
 
 app = Flask(__name__)
