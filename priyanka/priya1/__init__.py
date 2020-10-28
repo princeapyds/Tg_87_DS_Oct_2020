@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+# load all the required libraries
+from flask import Flask,jsonify,request
 import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
@@ -7,21 +8,17 @@ import numpy as np
 
 app = Flask(__name__)
 
-
-# create end point to  train your model and save training data in pickle file
 @app.route('/train_model')
 def train():
     data = pd.read_excel('False Alarm Cases.xlsx')
-    x = data.iloc[:, 1:7]
+    x = data.iloc[:,1:7]
     y = data['Spuriosity Index(0/1)']
     logm = LogisticRegression()
-    logm.fit(x, y)
-    joblib.dump(logm, 'train.pkl')
+    logm.fit(x,y)
+    joblib.dump(logm,'train.pkl')
     return "Model trained successfully"
 
 
-#  load pickle file and test your model, pass test data via POSt method
-#  First we need to load pickle file for it to get training data ref
 @app.route('/test_model', methods=['POST'])
 def test():
     pkl_file = joblib.load('train.pkl')
@@ -45,6 +42,4 @@ def test():
     else:
         return "True Alarm, Danger "
 
-
-
-app.run(port=6000)
+app.run(port=5000)

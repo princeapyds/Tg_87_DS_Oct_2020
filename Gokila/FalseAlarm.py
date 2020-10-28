@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask,jsonify,request
 import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 import joblib
 import numpy as np
 
+# create object
 app = Flask(__name__)
 
 
@@ -45,6 +46,6 @@ def test():
     else:
         return "True Alarm, Danger "
 
+    #  run the application on port
+app.run(port=5000)
 
-
-app.run(port=6000)
